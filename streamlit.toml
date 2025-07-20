@@ -1,0 +1,56 @@
+[global]
+developmentMode = false
+
+[server]
+headless = true
+enableCORS = false
+enableXsrfProtection = false
+port = 8501
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+primaryColor = "#13294B"  # Illinois blue
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F0F2F6"
+textColor = "#262730"
+font = "sans serif"
+
+[client]
+showErrorDetails = false
+toolbarMode = "minimal"
+
+[runner]
+magicEnabled = true
+installTracer = false
+fixMatplotlib = true
+
+[logger]
+level = "info"
+
+[deprecation]
+showfileUploaderEncoding = false
+showPyplotGlobalUse = false
+
+# Environment variables for Streamlit deployment
+[env]
+# API Configuration
+API_BASE_URL = "https://your-backend-api-url.com"
+SUPABASE_URL = "your-supabase-url"
+SUPABASE_KEY = "your-supabase-anon-key"
+
+# External API Keys
+OPENAI_API_KEY = "your-openai-api-key"
+BARTTORVIK_API_KEY = "your-barttorvik-api-key"
+
+# Database Configuration
+DATABASE_URL = "your-database-connection-string"
+
+# Application Settings
+ENVIRONMENT = "production"
+DEBUG = "false"
+LOG_LEVEL = "INFO"
+
+# Security
+SECRET_KEY = "your-secret-key-here" 

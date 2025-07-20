@@ -1,0 +1,31 @@
+# Core Streamlit
+streamlit==1.28.2
+
+# Data manipulation and analysis
+pandas==2.1.4
+numpy==1.25.2
+
+# HTTP requests for API communication
+requests==2.31.0
+
+# Data visualization
+plotly==5.17.0
+matplotlib==3.8.2
+seaborn==0.12.2
+
+# Additional Streamlit components
+streamlit-aggrid==0.3.4
+streamlit-option-menu==0.3.6
+
+# Date/time handling
+python-dateutil==2.8.2
+
+# Environment variables
+python-dotenv==1.0.0
+
+# Image processing (for team logos, etc.)
+Pillow==10.1.0
+
+# Excel file handling
+openpyxl==3.1.2
+xlsxwriter==3.1.9 
