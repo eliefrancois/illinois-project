@@ -180,6 +180,7 @@ The application currently provides:
 ## 📚 Documentation
 
 - **[LOCAL_SETUP.md](LOCAL_SETUP.md)**: Detailed local setup guide
+- **[DEPLOYMENT.md](DEPLOYMENT.md)**: Production deployment guide
 - **[PROJECT_PRESENTATION.md](PROJECT_PRESENTATION.md)**: Comprehensive project overview
 - **[API Documentation](http://localhost:8000/docs)**: Interactive API docs (when running)
 

@@ -15,7 +15,10 @@ st.set_page_config(
 )
 
 # API Configuration
-API_BASE_URL = "http://localhost:8000"
+import os
+
+# Get API URL from environment variable or use default
+API_BASE_URL = os.getenv("API_BASE_URL", "http://localhost:8000")
 
 def check_api_health():
     """Check if the backend API is running."""
