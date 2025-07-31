@@ -20,9 +20,46 @@ class BartTorvik:
             response = requests.get(url, timeout=30)
             response.raise_for_status()
             
-            # Read CSV data into DataFrame
-            from io import StringIO
-            df = pd.read_csv(StringIO(response.text))
+            # Parse CSV manually to handle column alignment issues
+            lines = response.text.strip().split('\n')
+            data_rows = []
+            
+            for line in lines[1:]:  # Skip header
+                if line.strip():
+                    cols = line.split(',')
+                    if len(cols) >= 44:  # Ensure we have enough columns
+                        # Map the correct columns based on our analysis
+                        row = {
+                            'rank': int(cols[0]) if cols[0].isdigit() else 999,
+                            'team': cols[1],
+                            'conf': cols[2], 
+                            'record': cols[3],
+                            'adjoe': float(cols[4]) if cols[4].replace('.','').replace('-','').isdigit() else 0.0,
+                            'oe_rank': int(cols[5]) if cols[5].replace('.','').isdigit() else 999,
+                            'adjde': float(cols[6]) if cols[6].replace('.','').replace('-','').isdigit() else 0.0,
+                            'de_rank': int(cols[7]) if cols[7].replace('.','').isdigit() else 999,
+                            'barthag': float(cols[8]) if cols[8].replace('.','').replace('-','').isdigit() else 0.0,
+                            'sos': float(cols[15]) if len(cols) > 15 and cols[15].replace('.','').replace('-','').isdigit() else 0.0,
+                            'ncsos': float(cols[16]) if len(cols) > 16 and cols[16].replace('.','').replace('-','').isdigit() else 0.0,
+                            'WAB': float(cols[41]) if len(cols) > 41 and cols[41].replace('.','').replace('-','').isdigit() else 0.0,
+                        }
+                        
+                        # Parse wins and losses from record
+                        if '-' in row['record']:
+                            try:
+                                wins, losses = row['record'].split('-')
+                                row['wins'] = int(wins)
+                                row['losses'] = int(losses)
+                            except:
+                                row['wins'] = 0
+                                row['losses'] = 0
+                        else:
+                            row['wins'] = 0
+                            row['losses'] = 0
+                        
+                        data_rows.append(row)
+            
+            df = pd.DataFrame(data_rows)
             return df
             
         except requests.exceptions.RequestException as e:
@@ -37,7 +74,7 @@ class BartTorvik:
             return None
             
         # Search for team (case insensitive)
-        team_data = df[df['Team'].str.contains(team_name, case=False, na=False)]
+        team_data = df[df['team'].str.contains(team_name, case=False, na=False)]
         
         if team_data.empty:
             return None
@@ -51,8 +88,8 @@ class BartTorvik:
         if df.empty:
             return {}
             
-        team1_data = df[df['Team'].str.contains(team1, case=False, na=False)]
-        team2_data = df[df['Team'].str.contains(team2, case=False, na=False)]
+        team1_data = df[df['team'].str.contains(team1, case=False, na=False)]
+        team2_data = df[df['team'].str.contains(team2, case=False, na=False)]
         
         if team1_data.empty or team2_data.empty:
             return {}
@@ -99,7 +136,7 @@ class BartTorvik:
         if df.empty:
             return []
             
-        return df['Team'].tolist()
+        return df['team'].tolist()
     
     def search_teams(self, query: str, year: Optional[int] = None) -> List[Dict]:
         """Search for teams by partial name match"""
@@ -108,13 +145,13 @@ class BartTorvik:
         if df.empty:
             return []
             
-        matching_teams = df[df['Team'].str.contains(query, case=False, na=False)]
+        matching_teams = df[df['team'].str.contains(query, case=False, na=False)]
         
         return [
             {
-                "team": row['Team'],
-                "conference": row.get('Conference', 'Unknown'),
-                "record": f"{row.get('wins', 0)}-{row.get('losses', 0)}",
+                "team": row['team'],
+                "conference": row.get('conf', 'Unknown'),
+                "record": row.get('record', '0-0'),
                 "barthag": row.get('barthag', 0)
             }
             for _, row in matching_teams.iterrows()

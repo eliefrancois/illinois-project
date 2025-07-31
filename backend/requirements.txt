@@ -1,19 +1,19 @@
 # Core FastAPI dependencies
-fastapi==0.104.1
-uvicorn[standard]==0.24.0
-pydantic==2.5.0
+fastapi>=0.104.1
+uvicorn[standard]>=0.24.0
+pydantic>=2.5.0
 
 # Database and ORM
-supabase==2.0.2
-sqlalchemy==2.0.23
+supabase>=2.0.2
+sqlalchemy>=2.0.23
 
 # HTTP client for external APIs
-httpx==0.25.2
-requests==2.31.0
+httpx>=0.25.2
+requests>=2.31.0
 
 # Data processing
-pandas==2.1.4
-numpy==1.25.2
+pandas>=2.1.4
+numpy>=1.26.0
 
 # Environment variables
 python-dotenv==1.0.0
