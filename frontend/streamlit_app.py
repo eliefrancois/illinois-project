@@ -18,7 +18,7 @@ st.set_page_config(
 import os
 
 # Get API URL from environment variable or use default
-API_BASE_URL = os.getenv("API_BASE_URL", "http://localhost:8000")
+API_BASE_URL = os.getenv("API_BASE_URL", "https://illinois-project.onrender.com")
 
 def check_api_health():
     """Check if the backend API is running."""
