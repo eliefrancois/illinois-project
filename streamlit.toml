@@ -36,7 +36,7 @@ showPyplotGlobalUse = false
 # Environment variables for Streamlit deployment
 [env]
 # API Configuration
-API_BASE_URL = "https://your-backend-api-url.com"
+API_BASE_URL = "https://illinois-project.onrender.com"
 SUPABASE_URL = "your-supabase-url"
 SUPABASE_KEY = "your-supabase-anon-key"
 
